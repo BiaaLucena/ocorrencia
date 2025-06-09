@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Professor from './components/Professor';
+import Ocorrencia from './components/Ocorrencia';
 
 function App() {
   const [logado, setLogado] = useState(false);
@@ -14,11 +15,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Se estiver logado, vai para /professor, senão redireciona para /professor também (sem login) */}
         <Route path="/" element={<Navigate to="/professor" />} />
+        <Route path="/professor" element={<Professor />} />
         <Route
-          path="/professor"
-          element={<Professor />}
+          path="/ocorrencia"
+          element={logado ? <Ocorrencia /> : <Navigate to="/professor" />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
