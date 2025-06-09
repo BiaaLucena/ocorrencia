@@ -1,211 +1,106 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Nunito', sans-serif;
 }
 
 body {
-  background: radial-gradient(circle at center, #2a1f4c, #1a1240 80%);
-  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0b754d; /* Fundo verde igual ao print */
+  height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  overflow: hidden;
-  position: relative;
+  align-items: center;
 }
 
-/* Adicionando estrelas fofinhas no fundo */
-body::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255, 192, 203, 0.2) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(173, 216, 230, 0.18) 1.2px, transparent 1.2px);
-  background-position: 0 0, 50px 80px, 90px 20px;
-  background-repeat: repeat;
-  animation: twinkle 5s ease-in-out infinite;
-  z-index: 0;
-}
-
-@keyframes twinkle {
-  0%, 100% {
-    background-size: 100px 100px, 100px 100px, 100px 100px;
-    opacity: 0.9;
-  }
-  50% {
-    background-size: 120px 120px, 120px 120px, 120px 120px;
-    opacity: 0.7;
-  }
-}
-
-.container {
-  background: linear-gradient(145deg, rgba(200, 160, 240, 0.25), rgba(230, 200, 255, 0.15));
-  border-radius: 24px;
+/* Container do login */
+.login-container {
+  background-color: white;
   padding: 40px;
-  width: 420px;
-  box-shadow:
-    0 8px 25px rgba(200, 160, 240, 0.7),
-    inset 0 0 10px rgba(255, 255, 255, 0.3);
-  border: 2px solid #d9b3ff;
-  position: relative;
-  backdrop-filter: blur(10px);
-  z-index: 1;
-}
-
-.container::before {
-  content: '🌟';
-  position: absolute;
-  font-size: 50px;
-  top: -25px;
-  right: -25px;
-  color: #d9b3ff;
-  animation: pulseStar 3s infinite ease-in-out;
-}
-
-@keyframes pulseStar {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.4);
-    opacity: 1;
-  }
-}
-
-.titulo {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  width: 400px;
   text-align: center;
-  font-size: 2.8em;
-  margin-bottom: 25px;
-  background: linear-gradient(90deg, #c8a0f0, #e6c8ff, #f2e6ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  font-weight: 900;
-  text-shadow:
-    0 0 12px #c8a0f0,
-    0 0 20px #e6c8ff;
+  border-top: 5px solid #e44d26; /* Faixa laranja fina no topo */
 }
 
-.formulario .campo {
-  margin-bottom: 20px;
+/* Título */
+h1 {
+  margin-bottom: 24px;
+  color: #043927;
+  font-weight: bold;
+}
+
+/* Formulário */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Campo */
+.campo {
+  text-align: left;
 }
 
 .campo label {
   display: block;
-  color: #d9b3ff;
-  margin-bottom: 8px;
-  font-weight: 700;
-  text-shadow: 0 0 5px #d9b3ff;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
 }
 
-.campo input, .campo select {
+.campo input {
   width: 100%;
-  padding: 14px 18px;
-  border: 2px solid #b799ff;
-  border-radius: 18px;
-  background-color: rgba(230, 220, 255, 0.15);
-  color: #eeeafc;
-  transition: all 0.3s ease;
-  box-shadow:
-    inset 0 2px 6px rgba(255, 255, 255, 0.3),
-    0 0 5px rgba(200, 160, 240, 0.4);
-}
-
-.campo input::placeholder {
-  color: #d1bfff;
-  opacity: 0.7;
-}
-
-.campo input:focus, .campo select:focus {
-  border-color: #cdb4ff;
-  background-color: rgba(230, 220, 255, 0.3);
-  box-shadow: 0 0 15px #cdb4ff;
-  outline: none;
-  color: #f8f4ff;
-}
-
-.botao {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(90deg, #cdb4ff, #d9b3ff);
+  padding: 12px;
+  border-radius: 8px;
   border: none;
-  border-radius: 20px;
-  color: #fff;
+  background-color: #111;
+  color: white;
+  font-size: 14px;
+}
+
+/* 🔥 Remove a seta do input number */
+.campo input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.campo input[type="number"]::-webkit-outer-spin-button,
+.campo input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Input focado */
+.campo input:focus {
+  border: 2px solid #007bff;
+  outline: none;
+}
+
+/* 🔘 Botão de login — SUPER ARREDONDADO */
+.botao {
+  background-color: #28a745;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 999px; /* BORDAS SUPER ARREDONDADAS */
   cursor: pointer;
-  font-weight: 700;
-  font-size: 1.1em;
-  box-shadow: 0 8px 25px rgba(200, 160, 240, 0.8);
-  transition: transform 0.25s ease, box-shadow 0.25s;
-  text-shadow: 0 0 5px #b799ff;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .botao:hover {
-  transform: scale(1.08);
-  box-shadow: 0 10px 30px rgba(200, 160, 240, 1);
+  background-color: #218838;
 }
 
+/* Erro */
 .erro {
-  color: #ff85b8;
-  text-align: center;
-  margin-bottom: 10px;
-  font-weight: 700;
-  text-shadow: 0 0 5px #ff85b8;
+  color: #e63946;
+  font-weight: 600;
+  margin-top: -10px;
 }
 
-.subtitulo {
-  text-align: center;
-  background: linear-gradient(90deg, #e3c4ff, #cdb4ff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  margin: 30px 0 10px;
-  font-weight: 800;
-  font-size: 1.6em;
-  text-shadow: 0 0 8px #cdb4ff;
-}
 
-.nenhuma {
-  color: #d9b3ff;
-  text-align: center;
-  text-shadow: 0 0 4px #b799ff;
-}
-
-.card-ocorrencia {
-  background-color: rgba(230, 220, 255, 0.1);
-  border: 2px solid #b799ff;
-  border-radius: 20px;
-  padding: 18px;
-  margin-bottom: 18px;
-  box-shadow: 0 5px 16px rgba(200, 160, 240, 0.5);
-  color: #e6e0ff;
-}
-
-.card-ocorrencia p {
-  margin: 6px 0;
-  text-shadow: 0 0 4px #d1bfff;
-}
-
-.sair {
-  margin-top: 20px;
-  background-color: transparent;
-  color: #d9b3ff;
-  border: 2px solid #d9b3ff;
-  border-radius: 20px;
-  font-weight: 700;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.sair:hover {
-  background-color: #d9b3ff;
-  color: #2a1f4c;
-}

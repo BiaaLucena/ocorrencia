@@ -1,0 +1,98 @@
+/* Fundo da página */
+body {
+  background-color: #0f774e;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container do formulário */
+.login-container,
+.ocorrencia-container {
+  background-color: white;
+  width: 400px;
+  margin: 100px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid #e24c1a;
+}
+
+/* Título */
+.login-container h1,
+.ocorrencia-container h1 {
+  text-align: center;
+  color: #003c2f;
+  margin-bottom: 25px;
+}
+
+/* Campo de entrada */
+.campo {
+  margin-bottom: 15px;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.campo input,
+.campo textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 7px;
+  border: none;
+  background-color: #151515;
+  color: white;
+  font-size: 15px;
+}
+
+/* Remover a seta do input[type=number] */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: textfield;
+}
+
+/* Foco do input */
+.campo input:focus,
+.campo textarea:focus {
+  border: 2px solid #007bff;
+  outline: none;
+}
+
+/* Botão */
+.botao {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.botao:hover {
+  background-color: #218838;
+}
+
+/* Mensagem de erro */
+.erro {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Info do professor */
+.professor-info {
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #003c2f;
+}

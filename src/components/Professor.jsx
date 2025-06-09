@@ -1,93 +1,64 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Professor as ProfessorModel } from '../model/Professor';
-
 import './Professor.css';
 
-function Professor() {
+const campos = [
+  { name: 'nome', label: 'Nome', type: 'text' },
+  { name: 'sobrenome', label: 'Sobrenome', type: 'text' },
+  { name: 'matricula', label: 'Matrícula', type: 'number' },
+];
+
+export default function ProfessorLogin() {
+  const [form, setForm] = useState(Object.fromEntries(campos.map(c => [c.name, ''])));
+  const [erro, setErro] = useState('');
   const navigate = useNavigate();
 
-  const [nome, setNome] = useState('');
-  const [sobrenome, setSobrenome] = useState('');
-  const [matricula, setMatricula] = useState('');
-  const [disciplina, setDisciplina] = useState('');
-  const [erro, setErro] = useState('');
+  const handleChange = ({ target: { name, value } }) =>
+    setForm({ ...form, [name]: value });
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
+    const { matricula, nome, sobrenome } = form;
 
-    if (!nome || !sobrenome || !matricula || !disciplina) {
-      setErro('Preencha todos os campos!');
+    if (!matricula || !nome || !sobrenome) {
+      setErro('Preencha todos os campos.');
       return;
     }
 
-    const professor = new ProfessorModel(
-      nome.trim(),
-      Number(matricula),
-      disciplina.trim(),
-      sobrenome.trim()
-    );
-
-    // Armazenar no localStorage (simulando sessão)
-    localStorage.setItem('professor', JSON.stringify(professor));
+    // Simula login com os dados informados
     localStorage.setItem('logado', 'true');
-
-    navigate('/professor');
+    localStorage.setItem('professorNome', `${nome} ${sobrenome}`);
+    localStorage.setItem('professorDisciplina', 'Desconhecida');
+    navigate('/ocorrencia');
   };
 
   return (
-    <div className="container">
-      <h1 className="titulo">Login Professor</h1>
+    <div className="login-container">
+      <h1>Login Professor</h1>
+      <form onSubmit={handleLogin} className="login-form">
+        {campos.map(({ name, label, type }) => (
+          <div className="campo" key={name}>
+            <label>{label}:</label>
+            <input
+              name={name}
+              type={type}
+              value={form[name]}
+              onChange={handleChange}
+              required
+              className={name === 'matricula' ? 'no-spinner' : ''}
+            />
+          </div>
+        ))}
 
-      {erro && <p className="erro">{erro}</p>}
+        {erro && <p className="erro">{erro}</p>}
 
-      <form onSubmit={handleSubmit} className="formulario">
-        <div className="campo">
-          <label>Nome:</label>
-          <input
-            type="text"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            placeholder="Digite seu nome"
-          />
-        </div>
+        
+  {erro && <p className="erro">{erro}</p>}
 
-        <div className="campo">
-          <label>Sobrenome:</label>
-          <input
-            type="text"
-            value={sobrenome}
-            onChange={(e) => setSobrenome(e.target.value)}
-            placeholder="Digite seu sobrenome"
-          />
-        </div>
-
-        <div className="campo">
-          <label>Matrícula:</label>
-          <input
-            type="number"
-            value={matricula}
-            onChange={(e) => setMatricula(e.target.value)}
-            placeholder="Digite sua matrícula"
-          />
-        </div>
-
-        <div className="campo">
-          <label>Disciplina:</label>
-          <input
-            type="text"
-            value={disciplina}
-            onChange={(e) => setDisciplina(e.target.value)}
-            placeholder="Ex.: Matemática, Português..."
-          />
-        </div>
-
-        <button type="submit" className="botao">
-          Entrar
-        </button>
+  <button className="botao" type="submit">Entrar</button>
       </form>
     </div>
   );
 }
 
-export default Professor;
+
