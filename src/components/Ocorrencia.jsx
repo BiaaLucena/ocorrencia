@@ -6,6 +6,7 @@ export default function Ocorrencia() {
   const [alunoNome, setAlunoNome] = useState('');
   const [alunoSobrenome, setAlunoSobrenome] = useState('');
   const [alunoMatricula, setAlunoMatricula] = useState('');
+  const [disciplina, setDisciplina] = useState('');
   const [data, setData] = useState('');
   const [motivo, setMotivo] = useState('');
   const [erro, setErro] = useState('');
@@ -16,7 +17,7 @@ export default function Ocorrencia() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!alunoNome || !alunoSobrenome || !alunoMatricula || !data || !motivo) {
+    if (!alunoNome || !alunoSobrenome || !alunoMatricula || !disciplina || !data || !motivo) {
       setErro('Preencha todos os campos.');
       return;
     }
@@ -30,6 +31,7 @@ export default function Ocorrencia() {
     console.log('Ocorrência registrada:', {
       aluno,
       professor: professorNome,
+      disciplina,
       data,
       motivo,
     });
@@ -76,6 +78,16 @@ export default function Ocorrencia() {
         </div>
 
         <div className="campo">
+          <label>Disciplina:</label>
+          <input
+            type="text"
+            value={disciplina}
+            onChange={(e) => setDisciplina(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="campo">
           <label>Data:</label>
           <input
             type="date"
@@ -102,4 +114,3 @@ export default function Ocorrencia() {
     </div>
   );
 }
-

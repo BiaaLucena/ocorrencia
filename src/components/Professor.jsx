@@ -9,41 +9,43 @@ const campos = [
 ];
 
 export default function ProfessorLogin() {
-  const [form, setForm] = useState(Object.fromEntries(campos.map(c => [c.name, ''])));
+  const [form, setForm] = useState({ nome: '', sobrenome: '', matricula: '' });
   const [erro, setErro] = useState('');
   const navigate = useNavigate();
 
-  const handleChange = ({ target: { name, value } }) =>
-    setForm({ ...form, [name]: value });
+  function mudou({ target }) {
+    setForm({ ...form, [target.name]: target.value });
+    if (erro) setErro('');
+  }
 
-  const handleLogin = (e) => {
+  function entrar(e) {
     e.preventDefault();
-    const { matricula, nome, sobrenome } = form;
 
-    if (!matricula || !nome || !sobrenome) {
+    if (!form.nome || !form.sobrenome || !form.matricula) {
       setErro('Preencha todos os campos.');
       return;
     }
 
-    // Simula login com os dados informados
     localStorage.setItem('logado', 'true');
-    localStorage.setItem('professorNome', `${nome} ${sobrenome}`);
+    localStorage.setItem('professorNome', `${form.nome} ${form.sobrenome}`);
     localStorage.setItem('professorDisciplina', 'Desconhecida');
+
     navigate('/ocorrencia');
-  };
+  }
 
   return (
     <div className="login-container">
       <h1>Login Professor</h1>
-      <form onSubmit={handleLogin} className="login-form">
+      <form onSubmit={entrar} className="login-form">
         {campos.map(({ name, label, type }) => (
           <div className="campo" key={name}>
-            <label>{label}:</label>
+            <label htmlFor={name}>{label}:</label>
             <input
+              id={name}
               name={name}
               type={type}
               value={form[name]}
-              onChange={handleChange}
+              onChange={mudou}
               required
               className={name === 'matricula' ? 'no-spinner' : ''}
             />
@@ -52,13 +54,11 @@ export default function ProfessorLogin() {
 
         {erro && <p className="erro">{erro}</p>}
 
-        
-  {erro && <p className="erro">{erro}</p>}
-
-  <button className="botao" type="submit">Entrar</button>
+        <button className="botao" type="submit">Entrar</button>
       </form>
     </div>
   );
 }
+
 
 
