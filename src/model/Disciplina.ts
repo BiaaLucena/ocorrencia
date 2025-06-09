@@ -6,8 +6,4 @@ export class Disciplina {
     this.codigo = codigo;
     this.descricao = descricao;
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> e4e182312073e6cc48a384f3edf48550025c92fc
