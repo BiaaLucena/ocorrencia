@@ -96,3 +96,45 @@ input[type=number] {
   margin-bottom: 15px;
   color: #003c2f;
 }
+
+.ocorrencia-page {
+  display: flex;
+  flex-direction: row-reverse; /* inverte para deixar o formulário à direita */
+  align-items: center; /* centraliza verticalmente */
+  justify-content: center; /* centraliza horizontalmente */
+  gap: 2rem;
+  height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.ocorrencias-lista {
+  background-color: #f0f0f0; /* fundo preto */
+  color: black; /* texto branco */
+  flex: 1;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid #e24c1a;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.ocorrencias-lista table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.ocorrencias-lista th,
+.ocorrencias-lista td {
+  padding: 8px;
+  border: 1px solid #444; /* borda mais visível no fundo preto */
+  text-align: left;
+}
+
+.ocorrencias-lista th {
+  background-color: #222;
+  color: #f0f0f0;
+}
