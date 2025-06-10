@@ -1,11 +1,11 @@
-/* Fundo da página */
+
 body {
   background-color: #0f774e;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Container do formulário */
+
 .login-container,
 .ocorrencia-container {
   background-color: white;
@@ -17,7 +17,7 @@ body {
   border-top: 5px solid #e24c1a;
 }
 
-/* Título */
+
 .login-container h1,
 .ocorrencia-container h1 {
   text-align: center;
@@ -25,7 +25,7 @@ body {
   margin-bottom: 25px;
 }
 
-/* Campo de entrada */
+
 .campo {
   margin-bottom: 15px;
 }
@@ -47,7 +47,7 @@ body {
   font-size: 15px;
 }
 
-/* Remover a seta do input[type=number] */
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -58,14 +58,14 @@ input[type=number] {
   appearance: textfield;
 }
 
-/* Foco do input */
+
 .campo input:focus,
 .campo textarea:focus {
   border: 2px solid #007bff;
   outline: none;
 }
 
-/* Botão */
+
 .botao {
   width: 100%;
   background-color: #28a745;
@@ -83,14 +83,14 @@ input[type=number] {
   background-color: #218838;
 }
 
-/* Mensagem de erro */
+
 .erro {
   color: red;
   text-align: center;
   margin-top: 10px;
 }
 
-/* Info do professor */
+
 .professor-info {
   font-weight: bold;
   margin-bottom: 15px;
