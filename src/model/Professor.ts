@@ -1,13 +1,16 @@
 export class Professor {
   nome: string;
+  sobrenome: string;
   matricula: number;
   disciplina: string;
-  sobrenome: string;
+  senha: string; 
 
-  constructor(nome: string, matricula: number, disciplina: string, sobrenome: string) {
+  constructor(nome: string, sobrenome: string, matricula: number, disciplina: string, senha: string) {
     this.nome = nome;
+    this.sobrenome = sobrenome;
     this.matricula = matricula;
     this.disciplina = disciplina;
-    this.sobrenome = sobrenome;
+    this.senha = senha;
   }
 }
+

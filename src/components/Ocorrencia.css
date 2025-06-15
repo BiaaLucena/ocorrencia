@@ -99,9 +99,9 @@ input[type=number] {
 
 .ocorrencia-page {
   display: flex;
-  flex-direction: row-reverse; /* inverte para deixar o formulário à direita */
-  align-items: center; /* centraliza verticalmente */
-  justify-content: center; /* centraliza horizontalmente */
+  flex-direction: row-reverse; 
+  align-items: center; 
+  justify-content: center; 
   gap: 2rem;
   height: 100vh;
   padding: 2rem;
@@ -109,8 +109,8 @@ input[type=number] {
 }
 
 .ocorrencias-lista {
-  background-color: #f0f0f0; /* fundo preto */
-  color: black; /* texto branco */
+  background-color: #f0f0f0; 
+  color: black; 
   flex: 1;
   max-width: 500px;
   padding: 20px;
@@ -130,7 +130,7 @@ input[type=number] {
 .ocorrencias-lista th,
 .ocorrencias-lista td {
   padding: 8px;
-  border: 1px solid #444; /* borda mais visível no fundo preto */
+  border: 1px solid #444; 
   text-align: left;
 }
 

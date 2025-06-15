@@ -2,59 +2,78 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Ocorrencia.css';
 
+interface Aluno {
+  nome: string;
+  sobrenome: string;
+  matricula: number;
+}
+
+interface Turma {
+  ano: number;
+  curso: string;
+}
+
+interface OcorrenciaData {
+  aluno: Aluno;
+  turma: Turma;
+  professor: string;
+  disciplina: string;
+  data: string;
+  motivo: string;
+}
+
 export default function Ocorrencia() {
   const [alunoNome, setAlunoNome] = useState('');
   const [alunoSobrenome, setAlunoSobrenome] = useState('');
   const [alunoMatricula, setAlunoMatricula] = useState('');
+  const [curso, setCurso] = useState('');
+  const [ano, setAno] = useState('');
   const [disciplina, setDisciplina] = useState('');
   const [data, setData] = useState('');
   const [motivo, setMotivo] = useState('');
   const [erro, setErro] = useState('');
-  
-  // Estado para guardar as ocorrências cadastradas
-  const [ocorrencias, setOcorrencias] = useState([]);
+  const [ocorrencias, setOcorrencias] = useState<OcorrenciaData[]>([]);
 
   const navigate = useNavigate();
   const professorNome = localStorage.getItem('professorNome') || 'Desconhecido';
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!alunoNome || !alunoSobrenome || !alunoMatricula || !disciplina || !data || !motivo) {
+    const campos = [alunoNome, alunoSobrenome, alunoMatricula, curso, ano, disciplina, data, motivo];
+    if (campos.some(campo => !campo.trim())) {
       setErro('Preencha todos os campos.');
       return;
     }
 
-    const aluno = {
-      nome: alunoNome,
-      sobrenome: alunoSobrenome,
-      matricula: Number(alunoMatricula),
-    };
-
-    const novaOcorrencia = {
-      aluno,
+    const novaOcorrencia: OcorrenciaData = {
+      aluno: {
+        nome: alunoNome,
+        sobrenome: alunoSobrenome,
+        matricula: Number(alunoMatricula)
+      },
+      turma: {
+        curso,
+        ano: Number(ano)
+      },
       professor: professorNome,
       disciplina,
       data,
-      motivo,
+      motivo
     };
 
-    // Adiciona a nova ocorrência na lista
     setOcorrencias(prev => [...prev, novaOcorrencia]);
-
     alert('Ocorrência registrada com sucesso!');
 
-    // Limpa o formulário
     setAlunoNome('');
     setAlunoSobrenome('');
     setAlunoMatricula('');
+    setCurso('');
+    setAno('');
     setDisciplina('');
     setData('');
     setMotivo('');
     setErro('');
-    
-    // Se quiser navegar para outra página depois de cadastrar, mantenha:
-    // navigate('/');
   };
 
   return (
@@ -66,63 +85,42 @@ export default function Ocorrencia() {
         <form className="ocorrencia-form" onSubmit={handleSubmit}>
           <div className="campo">
             <label>Nome do Aluno:</label>
-            <input
-              type="text"
-              value={alunoNome}
-              onChange={(e) => setAlunoNome(e.target.value)}
-              required
-            />
+            <input type="text" value={alunoNome} onChange={e => setAlunoNome(e.target.value)} required />
           </div>
 
           <div className="campo">
             <label>Sobrenome do Aluno:</label>
-            <input
-              type="text"
-              value={alunoSobrenome}
-              onChange={(e) => setAlunoSobrenome(e.target.value)}
-              required
-            />
+            <input type="text" value={alunoSobrenome} onChange={e => setAlunoSobrenome(e.target.value)} required />
           </div>
 
           <div className="campo">
             <label>Matrícula do Aluno:</label>
-            <input
-              type="number"
-              value={alunoMatricula}
-              onChange={(e) => setAlunoMatricula(e.target.value)}
-              required
-              className="no-spinner"
-            />
+            <input type="number" value={alunoMatricula} onChange={e => setAlunoMatricula(e.target.value)} required className="no-spinner" />
+          </div>
+
+          <div className="campo">
+            <label>Ano:</label>
+            <input type="number" value={ano} onChange={e => setAno(e.target.value)} required />
+          </div>
+
+          <div className="campo">
+            <label>Curso:</label>
+            <input type="text" value={curso} onChange={e => setCurso(e.target.value)} required />
           </div>
 
           <div className="campo">
             <label>Disciplina:</label>
-            <input
-              type="text"
-              value={disciplina}
-              onChange={(e) => setDisciplina(e.target.value)}
-              required
-            />
+            <input type="text" value={disciplina} onChange={e => setDisciplina(e.target.value)} required />
           </div>
 
           <div className="campo">
             <label>Data:</label>
-            <input
-              type="date"
-              value={data}
-              onChange={(e) => setData(e.target.value)}
-              required
-            />
+            <input type="date" value={data} onChange={e => setData(e.target.value)} required />
           </div>
 
           <div className="campo">
             <label>Motivo:</label>
-            <textarea
-              value={motivo}
-              onChange={(e) => setMotivo(e.target.value)}
-              rows="4"
-              required
-            />
+            <textarea value={motivo} onChange={e => setMotivo(e.target.value)} rows={4} required />
           </div>
 
           {erro && <p className="erro">{erro}</p>}
@@ -131,7 +129,6 @@ export default function Ocorrencia() {
         </form>
       </div>
 
-      {/* Lista das ocorrências ao lado */}
       <div className="ocorrencias-lista">
         <h2>Ocorrências Registradas</h2>
         {ocorrencias.length === 0 ? (
@@ -142,6 +139,7 @@ export default function Ocorrencia() {
               <tr>
                 <th>Aluno</th>
                 <th>Matrícula</th>
+                <th>Turma</th>
                 <th>Disciplina</th>
                 <th>Data</th>
                 <th>Motivo</th>
@@ -153,6 +151,7 @@ export default function Ocorrencia() {
                 <tr key={index}>
                   <td>{ocorrencia.aluno.nome} {ocorrencia.aluno.sobrenome}</td>
                   <td>{ocorrencia.aluno.matricula}</td>
+                  <td>{ocorrencia.turma.ano}º - {ocorrencia.turma.curso}</td>
                   <td>{ocorrencia.disciplina}</td>
                   <td>{new Date(ocorrencia.data).toLocaleDateString('pt-BR')}</td>
                   <td>{ocorrencia.motivo}</td>
@@ -166,8 +165,3 @@ export default function Ocorrencia() {
     </div>
   );
 }
-
-
-
-
-
