@@ -150,6 +150,7 @@ export default function Ocorrencia() {
         </form>
       </div>
 
+   
       <div className="ocorrencias-lista">
         <h2>Ocorrências Registradas</h2>
         {ocorrencias.length === 0 ? (
