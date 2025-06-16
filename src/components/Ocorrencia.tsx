@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Ocorrencia.css';
 
@@ -36,6 +36,19 @@ export default function Ocorrencia() {
 
   const navigate = useNavigate();
   const professorNome = localStorage.getItem('professorNome') || 'Desconhecido';
+
+  // Carrega ocorrências salvas no localStorage
+  useEffect(() => {
+    const dadosSalvos = localStorage.getItem('ocorrencias');
+    if (dadosSalvos) {
+      setOcorrencias(JSON.parse(dadosSalvos));
+    }
+  }, []);
+
+  // Salva no localStorage sempre que a lista mudar
+  useEffect(() => {
+    localStorage.setItem('ocorrencias', JSON.stringify(ocorrencias));
+  }, [ocorrencias]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,6 +89,12 @@ export default function Ocorrencia() {
     setErro('');
   };
 
+  const excluirOcorrencia = (index: number) => {
+    const copia = [...ocorrencias];
+    copia.splice(index, 1); // remove a ocorrência do índice indicado
+    setOcorrencias(copia);
+  };
+
   return (
     <div className="ocorrencia-page">
       <div className="ocorrencia-container">
@@ -83,6 +102,8 @@ export default function Ocorrencia() {
         <p className="professor-info">Professor: {professorNome}</p>
 
         <form className="ocorrencia-form" onSubmit={handleSubmit}>
+          {/* Campos do formulário... (iguais aos anteriores) */}
+
           <div className="campo">
             <label>Nome do Aluno:</label>
             <input type="text" value={alunoNome} onChange={e => setAlunoNome(e.target.value)} required />
@@ -144,6 +165,7 @@ export default function Ocorrencia() {
                 <th>Data</th>
                 <th>Motivo</th>
                 <th>Professor</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -156,6 +178,11 @@ export default function Ocorrencia() {
                   <td>{new Date(ocorrencia.data).toLocaleDateString('pt-BR')}</td>
                   <td>{ocorrencia.motivo}</td>
                   <td>{ocorrencia.professor}</td>
+                  <td>
+                    <button onClick={() => excluirOcorrencia(index)} className="botao-excluir">
+                      Excluir
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
