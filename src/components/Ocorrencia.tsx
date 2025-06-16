@@ -37,7 +37,7 @@ export default function Ocorrencia() {
   const navigate = useNavigate();
   const professorNome = localStorage.getItem('professorNome') || 'Desconhecido';
 
-  // Carrega ocorrências salvas no localStorage
+
   useEffect(() => {
     const dadosSalvos = localStorage.getItem('ocorrencias');
     if (dadosSalvos) {
@@ -45,7 +45,7 @@ export default function Ocorrencia() {
     }
   }, []);
 
-  // Salva no localStorage sempre que a lista mudar
+ 
   useEffect(() => {
     localStorage.setItem('ocorrencias', JSON.stringify(ocorrencias));
   }, [ocorrencias]);
@@ -91,7 +91,7 @@ export default function Ocorrencia() {
 
   const excluirOcorrencia = (index: number) => {
     const copia = [...ocorrencias];
-    copia.splice(index, 1); // remove a ocorrência do índice indicado
+    copia.splice(index, 1); 
     setOcorrencias(copia);
   };
 
@@ -102,7 +102,7 @@ export default function Ocorrencia() {
         <p className="professor-info">Professor: {professorNome}</p>
 
         <form className="ocorrencia-form" onSubmit={handleSubmit}>
-          {/* Campos do formulário... (iguais aos anteriores) */}
+         
 
           <div className="campo">
             <label>Nome do Aluno:</label>
